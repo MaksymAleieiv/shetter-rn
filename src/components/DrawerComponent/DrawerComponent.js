@@ -26,14 +26,14 @@ const sidebarItems = [
     },
 ]
 
-const DrawerComponent = ({navigation, myUsername}) => {
+const DrawerComponent = ({navigation, myUserInfo}) => {
     const [myData, setMyData] = React.useState({})
     React.useEffect(() => {
-        if(myUsername.length > 0)
-            mainInstance.get('/auth/users/' + myUsername)
+        if(myUserInfo.username.length > 0)
+            mainInstance.get('/auth/users/' + myUserInfo.username)
             .then(res => setMyData(res.data))
             .catch(e => {})
-    }, [myUsername])
+    }, [myUserInfo])
     const { clearUserInfo } = useActions()
     if(!myData) return (<></>)
     return (
@@ -45,7 +45,7 @@ const DrawerComponent = ({navigation, myUsername}) => {
                         key={'drawer_' + item.name}
                         style={DrawerSidebarStyles.sidebar__item}
                         onPress={() => {
-                            item.name !== 'LogOut' ? navigation.push(item.name, {username : myUsername}) : clearUserInfo()
+                            item.name !== 'LogOut' ? navigation.push(item.name, {username : myUserInfo.username}) : clearUserInfo()
                         }}
                     >
                         <Image
@@ -62,7 +62,7 @@ const DrawerComponent = ({navigation, myUsername}) => {
 
 function mapStateToProps(state) {
     return {
-        myUsername: state.user.userInfo.username
+        myUserInfo: state.user.userInfo
     }
 }
 

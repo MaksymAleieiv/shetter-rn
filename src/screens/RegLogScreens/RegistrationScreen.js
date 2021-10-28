@@ -64,7 +64,7 @@ const RegistrationScreen = ({navigation}) => {
                 <>
                     <Text style={[RegLogStyles.label, emailError ? RegLogStyles.labelError : {}]}>Your email</Text>
                     <TextInput
-                        maxLength={15}
+                        maxLength={31}
                         style={[RegLogStyles.input, emailError ? RegLogStyles.inputError : {}]}
                         onChangeText={text => {setEmail(text); setGeneralErrorText(''); setEmailErrorText('')}}
                         value={email}

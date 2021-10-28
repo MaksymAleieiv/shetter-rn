@@ -5,6 +5,7 @@ import EditableImageContainer from '../../components/EditableImageContainer/Edit
 import { CreatePostStyles } from './CreatePostScreenStyles'
 import mainInstance from '../../hooks_and_functions/mainInstance'
 import { useActions } from '../../hooks_and_functions/useActions'
+import CreatePostScreenHeader__PostButton from '../../components/Headers/CreatePostScreenHeader/CreatePostScreenHeader__PostButton'
 
 const CreatePostScreen = ({me, route, navigation}) => {
     const [content, setContent] = React.useState('')
@@ -13,7 +14,7 @@ const CreatePostScreen = ({me, route, navigation}) => {
     const [loading, setLoading] = React.useState(false)
     const [contentError, setContentError] = React.useState('')
     const inputRef = React.useRef()
-    const { addPostId, addCommentId, setCreatePost } = useActions()
+    const { addPostId, addCommentId } = useActions()
     React.useEffect(() => {
         if(route.params?.id){
             let url = route.params?.isPost ? '/api/v1/posts/' : '/api/v1/comments/'
@@ -26,7 +27,9 @@ const CreatePostScreen = ({me, route, navigation}) => {
     }, [])
     
     React.useEffect(() => {
-        setCreatePost(route.params?.id ? () => editPost() : () => createPost())
+        navigation.setOptions({
+            headerRight : () => (<CreatePostScreenHeader__PostButton onPost={route.params?.id ? editPost : createPost}/>)
+        })
     }, [content, images])
 
     const createPost = () => {
@@ -48,6 +51,7 @@ const CreatePostScreen = ({me, route, navigation}) => {
                 })
                 .catch(err => { 
                     const res = JSON.parse(err.request.response);
+                    console.log(res)
                     if(res.detail === 'Too big images uploaded. Maximum size is 2 MB'){
                         setContentError(res.detail)
                         return;
@@ -91,10 +95,11 @@ const CreatePostScreen = ({me, route, navigation}) => {
                 })
                 .catch(err => { 
                     const res = JSON.parse(err.request.response);
+                    console.log(res)
                     if(res.detail === 'Too big images uploaded. Maximum size is 2 MB'){
                         setContentError(res.detail)
                         return;
-                    }
+                    }else setContentError(res.detail)
                 })
             }else {
                 setContentError('Posts must have content')
@@ -114,6 +119,7 @@ const CreatePostScreen = ({me, route, navigation}) => {
                 <View>
                     <TextInput
                         ref={inputRef}
+                        maxLength={400}
                         style={[CreatePostStyles.textInput, contentError && {borderColor: 'red'}]}
                         onChangeText={(text) => {setContentError(''); setContent(text)}}
                         defaultValue={content}

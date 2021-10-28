@@ -1,21 +1,16 @@
 import React from 'react'
-import { useActions } from '../../hooks_and_functions/useActions'
+import { useNavigation } from '@react-navigation/core'
+import SelectedImagesScreenHeader from '../../components/Headers/SelectedImagesScreenHeader/SelectedImagesScreenHeader'
 
-const SelectImagesScreenHeader = ({selected, onSuccess}) => {
-    const { setSelectedImagesState, clearHelper } = useActions()
+const SelectImagesScreenHeader = ({selected, onSuccess, maxSelection}) => {
+    const navigation = useNavigation()
     React.useEffect(() => {
-        setSelectedImagesState({
-            selectedImagesCount : selected,
-            onSuccess : () => onSuccess()
+        navigation.setOptions({
+            headerRight: () => (<SelectedImagesScreenHeader selectedImagesCount={selected} onSuccess={onSuccess} maxSelection={maxSelection}/>)
         })
-
-        return () => {
-            clearHelper()
-        }
     }, [selected, onSuccess])
-    return (
-        <></>
-    )
+
+    return (<></>)
 }
 
-export default SelectImagesScreenHeader
+export default SelectImagesScreenHeader  

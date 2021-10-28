@@ -8,7 +8,8 @@ import SelectImagesScreenHeader from './SelectImagesScreenHeader'
 export default function SelectImagesScreen({route, navigation}) {
 
   const onSuccess = (data) => {
-    route.params?.setImages(p => p.concat(data))
+    if(route.params?.single) route.params?.setImages(data[0])
+    else route.params?.setImages(p => p.concat(data))
     navigation.goBack()
   };
 
@@ -70,7 +71,8 @@ export default function SelectImagesScreen({route, navigation}) {
             CustomNavigator={{
               Component : SelectImagesScreenHeader,
               props : {
-                onSuccess : (data) => onSuccess(data)
+                onSuccess : (data) => onSuccess(data),
+                maxSelection : route.params?.maxSelection || 6
               }
             }}
           />

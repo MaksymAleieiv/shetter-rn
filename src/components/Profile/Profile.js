@@ -5,8 +5,9 @@ import { AuthorBlockStyles } from '../post-component/AuthorBlock/AuthorBlockStyl
 import ProfileSkeleton from '../Skeletons/ProfileSkeleton/ProfileSkeleton'
 import getName from '../../hooks_and_functions/getName'
 import mainInstance from '../../hooks_and_functions/mainInstance'
+import { connect } from 'react-redux'
 
-const Profile = ({userData}) => {
+const Profile = ({userData, myUsername}) => {
     const [isSubscribed, setSubscribed] = React.useState(userData.is_subscribed)
     const Subscribe = () => {
         setSubscribed(p => !p)
@@ -28,11 +29,15 @@ const Profile = ({userData}) => {
                 </View>
             </View>
             <View style={ProfileStyles.Profile__Info}>
-                <View style={ProfileStyles.Profile__Info__Buttons}>
-                    <TouchableOpacity onPress={Subscribe} style={[ProfileStyles.Profile__Info__Button, isSubscribed ? ProfileStyles.Profile__Info__ButtonFollowed : ProfileStyles.Profile__Info__ButtonNotFollowed]}>
-                        <Text style={isSubscribed ? ProfileStyles.Profile__Info__ButtonFollowedText : ProfileStyles.Profile__Info__ButtonNotFollowedText}>{isSubscribed ? 'Unfollow' : 'Follow'}</Text> 
-                    </TouchableOpacity>
-                </View>
+                {myUsername !== userData.username ?
+                    <View style={ProfileStyles.Profile__Info__Buttons}>
+                        <TouchableOpacity onPress={Subscribe} style={[ProfileStyles.Profile__Info__Button, isSubscribed ? ProfileStyles.Profile__Info__ButtonFollowed : ProfileStyles.Profile__Info__ButtonNotFollowed]}>
+                            <Text style={isSubscribed ? ProfileStyles.Profile__Info__ButtonFollowedText : ProfileStyles.Profile__Info__ButtonNotFollowedText}>{isSubscribed ? 'Unfollow' : 'Follow'}</Text> 
+                        </TouchableOpacity>
+                    </View>
+                :
+                    undefined
+                }
                 <View style={ProfileStyles.Profile__Info__AuthorBlock}>
                     <View style={AuthorBlockStyles.authorBlock}>
                         <Text style={ProfileStyles.Profile__Info__name}>
@@ -57,4 +62,10 @@ const Profile = ({userData}) => {
     )
 }
 
-export default Profile
+function mapStateToProps(state) {
+    return {
+        myUsername: state.user.userInfo.username
+    }
+}
+
+export default connect(mapStateToProps)(Profile)

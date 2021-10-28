@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { userReducer } from './reducers/user-reducer/userReducer'
 import { changedPostsReducer } from './reducers/changed-posts-reducer/changedPostsReducer'
-import { helperReducer } from './reducers/helper-reducer/helperReducer'
 import thunk from 'redux-thunk'
 
 import { persistStore, persistReducer } from 'redux-persist'
@@ -14,8 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     user : persistReducer(persistConfig, userReducer),
-    changedPosts : changedPostsReducer,
-    helper : helperReducer
+    changedPosts : changedPostsReducer
 })
 
 let store = createStore(rootReducer, applyMiddleware(thunk))

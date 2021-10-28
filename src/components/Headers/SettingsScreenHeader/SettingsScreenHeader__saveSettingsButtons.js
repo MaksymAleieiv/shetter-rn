@@ -1,6 +1,5 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
-import { connect } from 'react-redux'
 import { commonStyles } from '../../../hooks_and_functions/styles'
 
 const SettingsScreenHeader__saveSettingsButtons = ({onChangeSettings}) => {
@@ -14,10 +13,4 @@ const SettingsScreenHeader__saveSettingsButtons = ({onChangeSettings}) => {
     )
 }
 
-function mapStateToProps(state) {
-    return {
-        onChangeSettings : state.helper.onChangeSettings,
-    }
-}
-
-export default connect(mapStateToProps)(SettingsScreenHeader__saveSettingsButtons)
+export default SettingsScreenHeader__saveSettingsButtons

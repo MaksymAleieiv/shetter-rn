@@ -3,13 +3,13 @@ import { View, Image, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { MainScreenHeaderStyles } from './MainScreenHeaderStyles'
 
-const MainScreenHeader = ({profilePhoto, navigation, MainFeedRef, SubscriptionsFeedRef}) => {
+const MainScreenHeader = ({myUserInfo, navigation, MainFeedRef, SubscriptionsFeedRef}) => {
     return (
         <View style={MainScreenHeaderStyles.header}>
             <TouchableOpacity style={MainScreenHeaderStyles.profilePictureContainer} onPress={() => navigation.openDrawer()}> 
                 <Image
                     style={MainScreenHeaderStyles.profilePicture}
-                    source={{uri : profilePhoto}}
+                    source={{uri : myUserInfo.profile_photo}}
                     defaultSource={require('../../../../assets/defaultAvatar.jpg')}
                 />
             </TouchableOpacity>
@@ -38,7 +38,7 @@ const MainScreenHeader = ({profilePhoto, navigation, MainFeedRef, SubscriptionsF
 
 function mapStateToProps(state) {
     return {
-        profilePhoto : state.user.userInfo.profile_photo
+        myUserInfo : state.user.userInfo
     }
 }
 

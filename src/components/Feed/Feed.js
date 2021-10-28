@@ -10,7 +10,7 @@ import ContentManager from './ContentManager/ContentManager';
 const jumpLength = 80;
 const skeletons = Array(jumpLength).fill({skeleton: true}).map((item, index) => ({...item, index, hasImage: Math.random()}))
 
-const Feed = ({route, navigation, feed, postId, parentId, changedPostIds, changedCommentIds, myUsername}) => {
+const Feed = ({route, navigation, feed, postId, parentId, changedPostIds, changedCommentIds, myUserInfo}) => {
     const [startPos, setStartPos] = React.useState(0)
     const [loading, setLoading] = React.useState(false)
     const [hasMore, setHasMore] = React.useState(true)
@@ -45,7 +45,7 @@ const Feed = ({route, navigation, feed, postId, parentId, changedPostIds, change
     )
 
     const renderItem = ({ item }) => (
-        <ContentManager post={item} route={route} navigation={navigation} myUsername={myUsername} />
+        <ContentManager post={item} route={route} navigation={navigation} myUserInfo={myUserInfo} />
     );
 
     return (
@@ -54,7 +54,7 @@ const Feed = ({route, navigation, feed, postId, parentId, changedPostIds, change
                 ref={route.params?.MainFeedRef || route.params?.SubscriptionsFeedRef || undefined}
                 style={{flex: 1}}
                 data={posts}
-                extraData={myUsername}
+                extraData={myUserInfo}
                 renderItem={renderItem}
                 onEndReached={() => {if(hasMore && !loading) {setStartPos(p => p + jumpLength); console.log('onEndTriggered')}}}
                 keyExtractor={post => post.skeleton ? 'skelton_' + post.index : 'post_' + post.id}
@@ -68,7 +68,7 @@ function mapStateToProps(state){
     return {
         changedPostIds : state.changedPosts.posts,
         changedCommentIds : state.changedPosts.comments,
-        myUsername : state.user.userInfo.username
+        myUserInfo : state.user.userInfo
     }
 }
 

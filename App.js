@@ -11,14 +11,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 export default function App() {
   return (
     <SafeAreaProvider>
-    <SafeAreaView style={styles.container}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <AppInner/>
-        </PersistGate>
-        <StatusBar style="auto" />
-      </Provider>
-    </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <AppInner/>
+          </PersistGate>
+          <StatusBar style="auto" />
+        </Provider>
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }

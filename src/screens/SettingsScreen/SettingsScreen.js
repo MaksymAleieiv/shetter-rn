@@ -5,9 +5,10 @@ import mainInstance from '../../hooks_and_functions/mainInstance'
 import { RegLogStyles } from '../RegLogScreens/RegLogStyles'
 import { ProfileStyles } from '../../components/Profile/ProfileStyles'
 import { useActions } from '../../hooks_and_functions/useActions'
+import SettingsScreenHeader__saveSettingsButtons from '../../components/Headers/SettingsScreenHeader/SettingsScreenHeader__saveSettingsButtons'
 
 const SettingsScreen = ({navigation, myData}) => {
-    const { clearHelper, setChangeSettings, getMe } = useActions()
+    const { getMe } = useActions()
     const [firstName, setFirstName] = React.useState(myData.first_name)
     const [lastName, setLastName] = React.useState(myData.last_name)
     const [bio, setBio] = React.useState(myData.bio)
@@ -23,13 +24,13 @@ const SettingsScreen = ({navigation, myData}) => {
             setProfilePhoto(me.profile_photo)
         })
         .catch(err => console.log(err))
-        return () => {
-            clearHelper()
-        }
     }, [])
 
+    console.log(profilePhoto)
     React.useEffect(() => {
-        setChangeSettings( () => changeSettings() )
+        navigation.setOptions({
+            headerRight: () => (<SettingsScreenHeader__saveSettingsButtons onChangeSettings={changeSettings}/>)
+        })
     }, [firstName, lastName, bio, profilePhoto])
 
     const changeSettings = () => {
@@ -44,13 +45,15 @@ const SettingsScreen = ({navigation, myData}) => {
             .finally(() => getMe())
         }
         const changePicture = async () => {
+            console.log(profilePhoto)
             if(profilePhoto.uri){
                 const formData = new FormData();
                 let localUri = profilePhoto.uri;
                 let filename = localUri.split('/').pop();
                 let match = /\.(\w+)$/.exec(filename);
                 let type = match ? `image/${match[1]}` : `image`;
-                formData.append('image', { uri: localUri, name: filename, type });
+                console.log(profilePhoto)
+                formData.append('photo', { uri: localUri, name: filename, type });
                 mainInstance.post('/api/v1/profile_photo/', formData, {headers :
                     {
                         'Content-Type' : 'multipart/form-data'
@@ -76,7 +79,7 @@ const SettingsScreen = ({navigation, myData}) => {
                 <View style={ProfileStyles.Profile__background}>
                     <TouchableOpacity
                         style={ProfileStyles.Profile__background__avatarContainer}
-                        onPress={() => navigation.push('SelectImages', {setImages : (c) => setProfilePhoto(c), maxSelection : 1})}
+                        onPress={() => navigation.push('SelectImages', {setImages : setProfilePhoto, maxSelection : 1, single : true})}
                     >
                         <Image
                             style={ProfileStyles.Profile__background__avatar}
