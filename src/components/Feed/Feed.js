@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import urlManager from './Functions/urlManager';
 import updatePosts from './Functions/updatePosts';
 import ContentManager from './ContentManager/ContentManager';
+import fetchNewPosts from '../../hooks_and_functions/fetchNewPosts';
 
 const jumpLength = 80;
 const skeletons = Array(jumpLength).fill({skeleton: true}).map((item, index) => ({...item, index, hasImage: Math.random()}))
@@ -18,6 +19,7 @@ const Feed = ({route, navigation, feed, postId, parentId, changedPostIds, change
     console.log('Feed Rerendered, ', feed, {
         startPos, loading, hasMore, postsLength: posts.length
     })
+
     React.useEffect(() => {
             let url = urlManager(feed, route, jumpLength, parentId, postId, startPos)
             console.log('startPos changed in', feed, startPos)
@@ -39,6 +41,7 @@ const Feed = ({route, navigation, feed, postId, parentId, changedPostIds, change
         React.useCallback(() => {
             const task = InteractionManager.runAfterInteractions(() => {
                 updatePosts(changedPostIds, changedCommentIds, posts, feed, setPosts)
+                if(feed === 'Main' && posts[0] && posts[0].id) fetchNewPosts(posts[0].id, setPosts)
             });
             return () => task.cancel();
         }, [changedPostIds, changedCommentIds])

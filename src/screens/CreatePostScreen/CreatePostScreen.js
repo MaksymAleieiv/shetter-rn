@@ -47,6 +47,7 @@ const CreatePostScreen = ({me, route, navigation}) => {
                 })
                 mainInstance.post('/api/v1/posts/', formData)
                 .then(() => {
+                    addPostId(0)
                     navigation.goBack()
                 })
                 .catch(err => { 
