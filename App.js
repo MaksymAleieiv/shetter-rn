@@ -8,7 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import AppInner from './AppInner';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppLoading from 'expo-app-loading'
-import { useFonts } from 'expo-font'
+import { useFonts } from 'expo-font';
 
 export default function App() {
   let [fontsLoaded] = useFonts({

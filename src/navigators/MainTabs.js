@@ -23,8 +23,8 @@ export default function MainTabs() {
     }, [])
     return(
         <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
-            <Tab.Screen name='Home' component={HomeScreen} initialParams={{MainFeedRef}} options={({route, navigation}) => ({ headerTitle : () => <MainScreenHeader navigation={navigation} MainFeedRef={MainFeedRef}/>})}/>
-            <Tab.Screen name='Subscriptions' component={SubscriptionsScreen} initialParams={{SubscriptionsFeedRef}} options={({route, navigation}) => ({ headerTitle : () => <MainScreenHeader navigation={navigation} SubscriptionsFeedRef={SubscriptionsFeedRef}/> })}/>
+            <Tab.Screen name='Home' component={HomeScreen} initialParams={{MainFeedRef}} options={({navigation}) => ({ headerTitle : () => <MainScreenHeader navigation={navigation} MainFeedRef={MainFeedRef}/>})}/>
+            <Tab.Screen name='Subscriptions' component={SubscriptionsScreen} initialParams={{SubscriptionsFeedRef}} options={({navigation}) => ({ headerTitle : () => <MainScreenHeader navigation={navigation} SubscriptionsFeedRef={SubscriptionsFeedRef}/> })}/>
             <Tab.Screen name='Search' component={SearchScreen} options={({navigation}) => ({ headerTitle : () => <MainScreenHeader navigation={navigation}/> })}/>
             <Tab.Screen name='Hot' component={HotScreen} options={({navigation}) => ({ headerTitle : () => <MainScreenHeader navigation={navigation}/> })}/>
         </Tab.Navigator>
