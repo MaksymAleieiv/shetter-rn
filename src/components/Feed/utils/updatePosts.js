@@ -11,13 +11,17 @@ export default function updatePosts(changedPostIds, changedCommentIds, posts, fe
         let indexesOfPostsThatShouldBeUpdated = [];
         changedIds.forEach(id => {
             let index = tempPosts.indexOf(tempPosts.find(post => post.id === id))
-            if(index !== -1)indexesOfPostsThatShouldBeUpdated.push(index)
+            if(index !== -1) indexesOfPostsThatShouldBeUpdated.push(index)
         })
         let finishedQuery = 0
         indexesOfPostsThatShouldBeUpdated.forEach(async (indexOfPost) => {
             let url = (commentFeeds.indexOf(feed) !== -1) ? '/api/v1/comments/' : '/api/v1/posts/'
-            const res = await mainInstance.get(url + tempPosts[indexOfPost].id)
-            tempPosts[indexOfPost] = res.data;
+            try {
+                let {data} = await mainInstance.get(url + tempPosts[indexOfPost].id)
+                tempPosts[indexOfPost] = data;
+            }catch {
+                tempPosts.splice(indexOfPost, 1)
+            }
             finishedQuery++;
             if(finishedQuery === indexesOfPostsThatShouldBeUpdated.length) {
                 setPosts(tempPosts)

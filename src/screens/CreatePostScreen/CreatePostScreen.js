@@ -28,9 +28,20 @@ const CreatePostScreen = ({me, route, navigation}) => {
     
     React.useEffect(() => {
         navigation.setOptions({
-            headerRight : () => (<CreatePostScreenHeader__PostButton onPost={route.params?.id ? editPost : createPost}/>)
+            headerRight : () => (<CreatePostScreenHeader__PostButton onPost={route.params?.id ? editPost : createPost} onDelete={deletePost} isBeingEdited={route.params?.id ? true : false}/>)
         })
     }, [content, images])
+
+    const deletePost = () => {
+        let url = route.params?.isPost ? '/api/v1/posts/' + route.params?.id : '/api/v1/comments/' + route.params?.id
+        mainInstance.delete(url)
+        .then(() => {
+            if(route.params?.isPost) addPostId(route.params?.id);
+            else addCommentId(route.params?.id)
+        })
+        .catch(e => {})
+        .finally(() => navigation.goBack())
+    }
 
     const createPost = () => {
         if(!loading)
