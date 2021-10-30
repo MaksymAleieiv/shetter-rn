@@ -26,6 +26,7 @@ export const CreatePostStyles = StyleSheet.create({
         borderColor: '#242426',
         marginTop: 13,
         borderBottomWidth: 2,
-        paddingLeft: 3
+        paddingLeft: 3,
+        fontFamily: 'SourceSansPro'
     }
 })

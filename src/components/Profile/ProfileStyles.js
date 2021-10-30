@@ -54,7 +54,8 @@ export const ProfileStyles = StyleSheet.create({
     Profile__Info__ButtonFollowedText: {
         color: '#7D7499',
         fontSize: 14,
-        fontWeight: '600'
+        fontWeight: '600',
+        fontFamily: 'SourceSansPro'
     },
     Profile__Info__ButtonNotFollowed: {
         justifyContent: 'center',
@@ -64,7 +65,8 @@ export const ProfileStyles = StyleSheet.create({
     Profile__Info__ButtonNotFollowedText: {
         color: '#FAF9FF',
         fontSize: 14,
-        fontWeight: '600'
+        fontWeight: '600',
+        fontFamily: 'SourceSansPro'
     },
     Profile__Info__AuthorBlock: {
         marginTop: 76,
@@ -77,25 +79,40 @@ export const ProfileStyles = StyleSheet.create({
     },
     cf: {
         fontWeight: '400',
-        opacity: .75
+        opacity: .75,
+        fontFamily: 'SourceSansPro'
     },
     ml16: {
         marginLeft: 16
     },
     bold: {
-        fontWeight: '600'
+        fontWeight: '600',
+        fontFamily: 'SourceSansPro'
     },
     Profile__Info__name: {
         fontWeight: '700',
         color: '#242426',
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: 'SourceSansPro'
     },
     Profile__Info__tag: {
         fontWeight: '400',
         color: '#242426',
-        fontSize: 14,
+        fontSize: 16,
         opacity: .5,
-        marginTop: 6,
-        marginLeft: 6
+        marginTop: 4,
+        marginLeft: 6,
+        fontFamily: 'SourceSansPro'
+    },
+    bioContainer: {
+        marginBottom: 8,
+        marginLeft: 16,
+        marginTop: 8
+    },
+    bioText: {
+        color: '#242426',
+        lineHeight: 20,
+        fontSize: 15,
+        fontFamily: 'SourceSansPro'
     }
 })

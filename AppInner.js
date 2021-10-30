@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-import { useActions } from './src/hooks_and_functions/useActions';
+import { useActions } from './src/hooks/useActions';
 
 import AppStack from './src/navigators/AppStack';
 import AuthorizationStack from './src/navigators/AuthorizationStack';

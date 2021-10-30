@@ -3,8 +3,8 @@ import { View, Text, TextInput, Image } from 'react-native'
 import { connect } from 'react-redux'
 import EditableImageContainer from '../../components/EditableImageContainer/EditableImageContainer'
 import { CreatePostStyles } from './CreatePostScreenStyles'
-import mainInstance from '../../hooks_and_functions/mainInstance'
-import { useActions } from '../../hooks_and_functions/useActions'
+import mainInstance from '../../api/mainInstance'
+import { useActions } from '../../hooks/useActions'
 import CreatePostScreenHeader__PostButton from '../../components/Headers/CreatePostScreenHeader/CreatePostScreenHeader__PostButton'
 
 const CreatePostScreen = ({me, route, navigation}) => {

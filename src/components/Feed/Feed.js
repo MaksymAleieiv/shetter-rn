@@ -1,12 +1,12 @@
 import React from 'react'
 import { FlatList, Text, View, InteractionManager } from 'react-native'
-import mainInstance from '../../hooks_and_functions/mainInstance';
+import mainInstance from '../../api/mainInstance';
 import { useFocusEffect } from '@react-navigation/core';
 import { connect } from 'react-redux';
-import urlManager from './Functions/urlManager';
-import updatePosts from './Functions/updatePosts';
+import urlManager from './utils/urlManager';
+import updatePosts from './utils/updatePosts';
 import ContentManager from './ContentManager/ContentManager';
-import fetchNewPosts from '../../hooks_and_functions/fetchNewPosts';
+import fetchNewPosts from '../../api/fetchNewPosts';
 
 const jumpLength = 80;
 const skeletons = Array(jumpLength).fill({skeleton: true}).map((item, index) => ({...item, index, hasImage: Math.random()}))

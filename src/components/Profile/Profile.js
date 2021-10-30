@@ -3,8 +3,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { ProfileStyles } from './ProfileStyles'
 import { AuthorBlockStyles } from '../post-component/AuthorBlock/AuthorBlockStyles'
 import ProfileSkeleton from '../Skeletons/ProfileSkeleton/ProfileSkeleton'
-import getName from '../../hooks_and_functions/getName'
-import mainInstance from '../../hooks_and_functions/mainInstance'
+import getName from '../../utils/getName'
+import mainInstance from '../../api/mainInstance'
 import { connect } from 'react-redux'
 
 const Profile = ({userData, myUsername}) => {
@@ -54,8 +54,8 @@ const Profile = ({userData, myUsername}) => {
                     <Text style={[ProfileStyles.bold, ProfileStyles.ml16]}>{userData.followers_count}</Text>
                     <Text style={ProfileStyles.cf}> Followers</Text>
                 </View>
-                <View style={{marginBottom: 8, marginLeft: 16, marginTop: 8}}>
-                    <Text style={{color: '#242426', lineHeight: 20, fontSize: 15}}>{userData.bio}</Text>
+                <View style={ProfileStyles.bioContainer}>
+                    <Text style={ProfileStyles.bioText}>{userData.bio}</Text>
                 </View>
             </View>
         </>

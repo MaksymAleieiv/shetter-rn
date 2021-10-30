@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-import getName from '../../hooks_and_functions/getName'
+import getName from '../../utils/getName'
 import { AuthorBlockStyles } from '../post-component/AuthorBlock/AuthorBlockStyles'
 import { ProfileStyles } from '../Profile/ProfileStyles'
 import { DrawerSidebarStyles } from './DrawerSidebarStyles'

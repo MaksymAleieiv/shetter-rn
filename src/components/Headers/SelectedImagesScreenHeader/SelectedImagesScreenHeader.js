@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native'
-import { commonStyles } from '../../../hooks_and_functions/styles';
+import { commonStyles } from '../../../common-styles/styles';
 const windowWidth = Dimensions.get('window').width;
 
 const SelectedImagesScreenHeader = ({ selectedImagesCount, onSuccess, maxSelection}) => {

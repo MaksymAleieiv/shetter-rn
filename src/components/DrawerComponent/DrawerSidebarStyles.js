@@ -26,7 +26,8 @@ export const DrawerSidebarStyles = StyleSheet.create({
         color: '#242426',
         fontSize: 16,
         marginLeft: 4,
-        opacity: .75
+        opacity: .85,
+        fontFamily: 'SourceSansPro'
     },
     sidebar__item__icon: {
         width: 18,

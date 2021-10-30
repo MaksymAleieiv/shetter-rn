@@ -20,5 +20,16 @@ export const PostStyles = StyleSheet.create({
         width: 56,
         height: 56,
         borderRadius: 28
+    },
+    contentContainer: {
+        flexDirection:'row',
+        marginBottom: 4
+    },
+    content: {
+        flex: 1,
+        flexWrap: 'wrap',
+        color: '#242426',
+        fontSize: 15,
+        fontFamily: 'SourceSansPro'
     }
 })

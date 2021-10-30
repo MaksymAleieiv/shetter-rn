@@ -7,9 +7,16 @@ import { store, persistor } from './store/index';
 import { PersistGate } from 'redux-persist/integration/react'
 import AppInner from './AppInner';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
 
 export default function App() {
-  return (
+  let [fontsLoaded] = useFonts({
+    'SourceSansPro': require('./assets/fonts/SourceSansPro.ttf'),
+  });
+
+  if (!fontsLoaded) return <AppLoading />;
+  else return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Provider store={store}>
@@ -20,7 +27,7 @@ export default function App() {
         </Provider>
       </SafeAreaView>
     </SafeAreaProvider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

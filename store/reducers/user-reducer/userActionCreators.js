@@ -1,5 +1,5 @@
 import { userActionTypes } from'./userActionTypes'
-import mainInstance from '../../../src/hooks_and_functions/mainInstance'
+import mainInstance from '../../../src/api/mainInstance'
 export const userActionCreators = {
     changeUserInfo : (payload) => ({type: userActionTypes.CHANGE_USER_INFO, payload}),
     clearUserInfo : () => ({type: userActionTypes.CLEAR_USER_INFO}),

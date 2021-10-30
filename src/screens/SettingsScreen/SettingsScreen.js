@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import mainInstance from '../../hooks_and_functions/mainInstance'
+import mainInstance from '../../api/mainInstance'
 import { RegLogStyles } from '../RegLogScreens/RegLogStyles'
 import { ProfileStyles } from '../../components/Profile/ProfileStyles'
-import { useActions } from '../../hooks_and_functions/useActions'
+import { useActions } from '../../hooks/useActions'
 import SettingsScreenHeader__saveSettingsButtons from '../../components/Headers/SettingsScreenHeader/SettingsScreenHeader__saveSettingsButtons'
 
 const SettingsScreen = ({navigation, myData}) => {

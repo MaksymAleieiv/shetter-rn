@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
-import { useActions } from '../../../src/hooks_and_functions/useActions'
-import mainInstance from '../../hooks_and_functions/mainInstance'
+import { useActions } from '../../hooks/useActions'
+import mainInstance from '../../api/mainInstance'
 import { RegLogStyles } from './RegLogStyles'
 
 const LoginScreen = ({navigation}) => {

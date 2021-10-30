@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, Image, Text } from 'react-native'
-import mainInstance from '../../../hooks_and_functions/mainInstance'
-import { useActions } from '../../../hooks_and_functions/useActions'
+import mainInstance from '../../../api/mainInstance'
+import { useActions } from '../../../hooks/useActions'
 import { ButtonsBlockStyles } from './ButtonsBlockStyles'
 
 const ButtonsBlock = ({id, isPost, commentsCount, totalLikes, isLiked_, IsBookmarked, isMyPost, navigation, postId}) => {

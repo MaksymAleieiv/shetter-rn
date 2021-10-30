@@ -8,11 +8,13 @@ export const AuthorBlockStyles = StyleSheet.create({
         fontWeight: 'bold',
         marginRight: 4,
         fontSize: 14,
+        fontFamily: 'SourceSansPro'
     },
     tag: {
         color: '#242426',
         opacity: .5,
         fontWeight: '200',
         fontSize: 14,
+        fontFamily: 'SourceSansPro'
     }
 })

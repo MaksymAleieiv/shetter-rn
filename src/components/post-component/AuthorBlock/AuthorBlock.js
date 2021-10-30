@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { AuthorBlockStyles } from './AuthorBlockStyles'
-import getName from '../../../hooks_and_functions/getName'
+import getName from '../../../utils/getName'
 
 const AuthorBlock = ({ firstName, lastName, username, routeUsername, datePosted, navigation }) => {
     const getTime = (datePosted) => {

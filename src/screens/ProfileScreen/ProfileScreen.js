@@ -2,7 +2,7 @@ import React from 'react'
 import Feed from '../../components/Feed/Feed'
 import Profile from '../../components/Profile/Profile'
 import { ScrollView, TouchableOpacity, View, Text, InteractionManager } from 'react-native';
-import mainInstance from '../../hooks_and_functions/mainInstance';
+import mainInstance from '../../api/mainInstance';
 import HeaderSkeleton from '../../components/Skeletons/HeaderSkeleton/HeaderSkeleton';
 import { ProfileScreenStyles } from './ProfileScreenStyles';
 
@@ -29,7 +29,7 @@ const ProfileScreen = ({route, navigation}) => {
                     },
                     {
                         name: 'Liked',
-                        count: data.user_post_likes_count// + data.user_comment_likes_count
+                        count: data.user_post_likes_count
                     }
                 ])
             }catch{
@@ -53,7 +53,7 @@ const ProfileScreen = ({route, navigation}) => {
                         style={ProfileScreenStyles.header__item}
                         onPress={() => {setCurrentScreen(index); ScrollViewRef.current.scrollTo({y: 250})}}
                     >
-                        <View style={[{flexDirection: 'row'}, currentScreen === index ? {borderBottomColor: '#7D7499', borderBottomWidth: 3, height: '100%', marginTop: 8, height: 27} : {}]}>
+                        <View style={[{flexDirection: 'row'}, currentScreen === index ? ProfileScreenStyles.activeTab : {}]}>
                             <Text style={ProfileScreenStyles.bold}>{feed.name}</Text>
                             <Text style={[ProfileScreenStyles.cf, ProfileScreenStyles.ml6]}>{feed.count}</Text>
                         </View>

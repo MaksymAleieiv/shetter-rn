@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
-import { commonStyles } from '../../../hooks_and_functions/styles'
+import { commonStyles } from '../../../common-styles/styles'
 
 const CreatePostScreenHeader__PostButton = ({onPost}) => {
     return (

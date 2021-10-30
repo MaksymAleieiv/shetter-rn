@@ -29,8 +29,8 @@ const Post = ({post, routeUsername, navigation, authorInfo, isMyPost}) => {
                         username={authorInfo.username} datePosted={post.pub_date}
                         navigation={navigation} routeUsername={routeUsername}
                     />
-                    <View style={{flexDirection:'row', marginBottom: 4}}>
-                        <Text style={{flex: 1, flexWrap: 'wrap', color: '#242426'}}>
+                    <View style={PostStyles.contentContainer}>
+                        <Text style={PostStyles.content}>
                             {post.content}
                         </Text>
                     </View>

@@ -7,7 +7,7 @@ import SubscriptionsScreen from '../screens/SubscriptionsScreen/SubscriptionsScr
 import HotScreen from '../screens/HotScreen/HotScreen';
 import SearchScreen from '../screens/SearchScreen/SearchScreen';
 
-import { useActions } from '../hooks_and_functions/useActions';
+import { useActions } from '../hooks/useActions';
 
 const Tab = createBottomTabNavigator();
 

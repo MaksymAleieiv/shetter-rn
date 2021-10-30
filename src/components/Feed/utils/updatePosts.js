@@ -1,4 +1,4 @@
-import mainInstance from '../../../hooks_and_functions/mainInstance';
+import mainInstance from '../../../api/mainInstance';
 
 const commentFeeds = ['Comments', 'Profile__users-comments', 'Profile__users-liked-comments', 'Bookmarks__users-liked-comments']
 

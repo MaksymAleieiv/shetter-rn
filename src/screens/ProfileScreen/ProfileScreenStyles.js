@@ -25,7 +25,8 @@ export const ProfileScreenStyles = StyleSheet.create({
     },
     cf: {
         fontWeight: '400',
-        opacity: .75
+        opacity: .75,
+        fontFamily: 'SourceSansPro'
     },
     ml16: {
         marginLeft: 16
@@ -34,6 +35,14 @@ export const ProfileScreenStyles = StyleSheet.create({
         marginLeft: 6
     },
     bold: {
-        fontWeight: '600'
-    } 
+        fontWeight: '600',
+        fontFamily: 'SourceSansPro'
+    },
+    activeTab: {
+        borderBottomColor: '#7D7499',
+        borderBottomWidth: 3,
+        height: '100%',
+        marginTop: 8,
+        height: 27
+    }
 })

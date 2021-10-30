@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import { useActions } from '../../hooks_and_functions/useActions'
+import { useActions } from '../../hooks/useActions'
 import { connect } from 'react-redux'
-import mainInstance from '../../hooks_and_functions/mainInstance'
+import mainInstance from '../../api/mainInstance'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { DrawerSidebarStyles } from './DrawerSidebarStyles'
 import DrawerSidebar__Profile from './DrawerSidebar__Profile'
@@ -26,7 +26,7 @@ const sidebarItems = [
     },
 ]
 
-const DrawerComponent = ({navigation, myUserInfo}) => {
+const DrawerSidebarComponent = ({navigation, myUserInfo}) => {
     const [myData, setMyData] = React.useState({})
     React.useEffect(() => {
         if(myUserInfo.username.length > 0)
@@ -66,4 +66,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(DrawerComponent)
+export default connect(mapStateToProps)(DrawerSidebarComponent)

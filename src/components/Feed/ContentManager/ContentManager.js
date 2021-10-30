@@ -8,17 +8,17 @@ const ContentManager = ({post, route, navigation, myUserInfo}) => {
         return (<PostSkeleton hasImage={post.hasImage}/>)
     else
         return (
-        <TouchableOpacity
-            onPress={() => {
-                navigation.push('Post', 
-                {
-                    postId : post.id,
-                    isPost: post.parent === undefined,
-                    parentId: route.params?.parentId || post.id
-                })
-            }}>
-            <Post post={post} routeUsername={route.params?.username} navigation={navigation}
-            authorInfo={post.user.username === myUserInfo.username ? myUserInfo : post.user} isMyPost={post.user.username === myUserInfo.username}/>
-        </TouchableOpacity>)
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.push('Post', 
+                    {
+                        postId : post.id,
+                        isPost: post.parent === undefined,
+                        parentId: route.params?.parentId || post.id
+                    })
+                }}>
+                <Post post={post} routeUsername={route.params?.username} navigation={navigation}
+                authorInfo={post.user.username === myUserInfo.username ? myUserInfo : post.user} isMyPost={post.user.username === myUserInfo.username}/>
+            </TouchableOpacity>)
 }
 export default ContentManager

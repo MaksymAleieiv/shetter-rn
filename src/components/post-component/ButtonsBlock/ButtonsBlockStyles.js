@@ -18,6 +18,7 @@ export const ButtonsBlockStyles = StyleSheet.create({
         color: '#242426',
         opacity: 0.65,
         marginLeft: 8,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'SourceSansPro'
     }
 })

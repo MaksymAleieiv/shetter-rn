@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native'
-import mainInstance from '../../../hooks_and_functions/mainInstance'
-import { useActions } from '../../../hooks_and_functions/useActions';
+import mainInstance from '../../../api/mainInstance'
+import { useActions } from '../../../hooks/useActions';
 const windowWidth = Dimensions.get('window').width;
 
 const AddComment = ({postId, parentId, isPost}) => {
