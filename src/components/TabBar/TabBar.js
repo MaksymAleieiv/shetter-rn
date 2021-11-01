@@ -21,7 +21,7 @@ const buttons = [
 ]
 
 const TabBar = ({navigation}) => {
-    let h = navigation.getState().history;
+    let { index, routes } = navigation.getState();
     return (
         <View style={TabBarStyles.tabBar}>
             {buttons.map(btn => (
@@ -34,7 +34,7 @@ const TabBar = ({navigation}) => {
                         style={[
                             TabBarStyles.tabbar__button__image,
                             btn.name === 'Home' && {height: 20},
-                            h[h.length - 1].key.includes(btn.name) && [
+                            routes[index] === btn.name && [
                                 {width: 32, height: 30},
                                 btn.name === 'Home' && {height: 26}]
                             ]}

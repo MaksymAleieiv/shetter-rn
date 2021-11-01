@@ -75,7 +75,7 @@ export const RegLogStyles = StyleSheet.create({
         marginBottom: 20
     },
     loginTextView: {
-        bottom: 270,
+        bottom: 0,
     },
     registerTextView: {
         width: '100%',
@@ -93,5 +93,8 @@ export const RegLogStyles = StyleSheet.create({
         fontWeight: '600',
         marginLeft: 4,
         fontSize: 18
+    },
+    loginText: {
+        backgroundColor: 'transparent'
     }
 })

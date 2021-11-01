@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { useActions } from '../../hooks/useActions'
 import mainInstance from '../../api/mainInstance'
 import { RegLogStyles } from './RegLogStyles'
@@ -55,87 +55,115 @@ const RegistrationScreen = ({navigation}) => {
             setConfirmPasswordErrorText('Do not match')
         }
     }
+   
+    const validateEmail = () => {
+        let reg = /\S+@\S+\.\S+/;
+        if (reg.test(email) === false) setEmailErrorText('Incorrect email')
+    }
+
+    const validatePassword = (text) => {
+        if (text.length < 8) setPasswordErrorText('Password is too short')
+    }
+
+    const usernameRef = React.useRef()
+    const passwordRef = React.useRef()
+    const confirmPasswordRef = React.useRef()
+
     return (
-        <>
-            <View style={RegLogStyles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{flex: 1}}
+        >
+            <ScrollView style={{flex: 1}}>
+                <View style={RegLogStyles.container}>
 
-                <Text style={RegLogStyles.title}>Sign Up to Shetter</Text>
+                    <Text style={RegLogStyles.title}>Sign Up to Shetter</Text>
 
-                <>
                     <Text style={[RegLogStyles.label, emailError ? RegLogStyles.labelError : {}]}>Your email</Text>
                     <TextInput
                         maxLength={31}
                         style={[RegLogStyles.input, emailError ? RegLogStyles.inputError : {}]}
                         onChangeText={text => {setEmail(text); setGeneralErrorText(''); setEmailErrorText('')}}
                         value={email}
-                        onSubmitEditing={register}
+                        onEndEditing={validateEmail}
+                        onSubmitEditing={() => usernameRef.current.focus()}
                     />
                     <Text style={RegLogStyles.errorText}>{emailError}</Text>
-                </>
 
-                <>
                     <Text style={[RegLogStyles.label, usernameError ? RegLogStyles.labelError : {}]}>Username</Text>
                     <TextInput
+                        ref={usernameRef}
                         maxLength={15}
                         style={[RegLogStyles.input, usernameError ? RegLogStyles.inputError : {}]}
                         onChangeText={text => {setUsername(text); setGeneralErrorText(''); setUsernameErrorText('')}}
                         value={username}
-                        onSubmitEditing={register}
+                        onSubmitEditing={() => passwordRef.current.focus()}
                     />
                     <Text style={RegLogStyles.errorText}>{usernameError}</Text>
-                </>
-                
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
-                    <View style={RegLogStyles.fieldContainerShort}>
-                        <Text style={[RegLogStyles.label, passwordError ? RegLogStyles.labelError : {}]}>Password</Text>
-                        <TextInput
-                            maxLength={15}
-                            style={[RegLogStyles.input, passwordError ? RegLogStyles.inputError : {}]}
-                            onChangeText={text => {setPassword(text); setGeneralErrorText(''); setPasswordErrorText('')}}
-                            value={password}
-                            onSubmitEditing={register}
-                        />
-                        <Text style={RegLogStyles.errorText}>{passwordError}</Text>
+                                      
+                    <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
+                        <View style={RegLogStyles.fieldContainerShort}>
+                            <Text style={[RegLogStyles.label, passwordError ? RegLogStyles.labelError : {}]}>Password</Text>
+                            <TextInput
+                                ref={passwordRef}
+                                maxLength={15}
+                                style={[RegLogStyles.input, passwordError ? RegLogStyles.inputError : {}]}
+                                onChangeText={text => {setPassword(text); setGeneralErrorText(''); setPasswordErrorText('')}}
+                                value={password}
+                                onEndEditing={validatePassword}
+                                onSubmitEditing={() => confirmPasswordRef.current.focus()}
+                            />
+                            <Text style={RegLogStyles.errorText}>{passwordError}</Text>
+                        </View>
+
+                        <View style={RegLogStyles.fieldContainerShort}>
+                            <Text style={[RegLogStyles.label, confirmPasswordError ? RegLogStyles.labelError : {}]}>Confirm password</Text>
+                            <TextInput
+                                ref={confirmPasswordRef}
+                                maxLength={15}
+                                style={[RegLogStyles.input, confirmPasswordError ? RegLogStyles.inputError : {}]}
+                                onChangeText={text => {setConfirmPassword(text); setGeneralErrorText(''); setConfirmPasswordErrorText('')}}
+                                value={confirmPassword}
+                                onEndEditing={validatePassword}
+                                onSubmitEditing={register}
+                            />
+                            <Text style={RegLogStyles.errorText}>{confirmPasswordError}</Text>
+                        </View>
                     </View>
 
-                    <View style={RegLogStyles.fieldContainerShort}>
-                        <Text style={[RegLogStyles.label, confirmPasswordError ? RegLogStyles.labelError : {}]}>Confirm password</Text>
-                        <TextInput
-                            maxLength={15}
-                            style={[RegLogStyles.input, confirmPasswordError ? RegLogStyles.inputError : {}]}
-                            onChangeText={text => {setConfirmPassword(text); setGeneralErrorText(''); setConfirmPasswordErrorText('')}}
-                            value={confirmPassword}
-                            onSubmitEditing={register}
-                        />
-                        <Text style={RegLogStyles.errorText}>{confirmPasswordError}</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <TouchableOpacity 
+                            style={RegLogStyles.button}
+                            onPress={register}
+                        >
+                            <Text style={RegLogStyles.buttonText}>Sign Up</Text>
+                        </TouchableOpacity>
+                        <Text style={{color: '#E12222', maxWidth: '33%'}}>{generalError}</Text>
                     </View>
+
                 </View>
 
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <TouchableOpacity 
-                        style={RegLogStyles.button}
-                        onPress={register}
+                <View style={[RegLogStyles.registerTextView, RegLogStyles.loginTextView]}>
+                    <Text style={{fontSize: 18}}>Already have have an account ? </Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Login')}
                     >
-                        <Text style={RegLogStyles.buttonText}>Sign Up</Text>
+                        <Text style={[RegLogStyles.registerText, RegLogStyles.loginText]}>Log In</Text>
                     </TouchableOpacity>
-                    <Text style={{color: '#E12222', maxWidth: '33%'}}>{generalError}</Text>
                 </View>
-
-            </View>
-            <Image
-                style={RegLogStyles.gavno}
-                source={require('../../../assets/Gavno.png')}
-            />
-            <View style={[RegLogStyles.registerTextView, RegLogStyles.loginTextView]}>
-                <Text style={{fontSize: 18}}>Already have have an account ? </Text>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Login')}
-                >
-                    <Text style={RegLogStyles.registerText}>Log In</Text>
-                </TouchableOpacity>
-            </View>
-        </>
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
 export default RegistrationScreen
+
+
+/**
+ * 
+
+                <Image
+                    style={RegLogStyles.gavno}
+                    source={require('../../../assets/Gavno.png')}
+                />
+ */
